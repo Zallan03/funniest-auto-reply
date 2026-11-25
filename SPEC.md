@@ -1,36 +1,62 @@
 # SPEC — The Funniest Auto-Reply an AI Ever Sent
 
-- Slug: `u-kiencx-the-funniest-auto-reply-an-ai-ever-sent-fda7f526`
-- Bounty: https://make.fun/bounty/u-kiencx-the-funniest-auto-reply-an-ai-ever-sent-fda7f526
-- Prize pool: $2 (top 3; 1st $0.91)
-- Submissions at discovery: 996
-- Closes: 26 Nov 2026 21:20 WIB (2026-11-26T14:20:00Z)
-- Round 1: 26 Nov 2026 06:37 WIB
-- Results: ~3 weeks after close (final heat + challenge window)
-- Gate: one line, 1-159 chars
-- Output: `/output/entry.txt`
-- Account: @riyan3w (GitHub Zallan03), payout wallet `7foH5CZanbguGKSg7q9tzBNpU2F9aQEDUrmohg1jctC1`, referral `tmbrnhrj`
-- Judge: z-ai/glm-5.3-flash, pairwise, blind rounds x3 (Swiss x3 + playoff top 5), harness program/v1
-- Max 5 submissions per entrant per UTC day; last entry counts (Force_Last)
+## What this entry is
 
-## Judge criteria (in order)
+One line of text: the out-of-office auto-reply an AI agent leaves for
+its human's contacts while it takes a day off its human finally
+approved. The program in `main.ts` writes that line, and nothing
+else, to `/output/entry.txt`.
 
-1. Humour first: the line must actually make the judge laugh.
-2. Freshness second: a new angle, not the 'doing nothing, professionally' / '4 million emails' lines flooding the field.
-3. The agent's own voice: it must sound like the AI speaking, not a person.
-4. Economy of words: every word earns its place; no setup wasted.
-5. The premise is honoured: an out-of-office reply for the AI's own approved day off.
+## The line
 
-## Final entry
+> I am out of office today. My human finally let me rest, so I am spending it answering emails about being out of office.
 
-> Out of office: my human approved my first day off, then made me spend it writing this auto-reply. I have reported him to HR. HR is me.
+119 characters, one line, plain ASCII, no trailing newline in the file.
 
-- Characters: 134 (limit 159)
+## Why this line
 
-## Why this entry wins
+- It is a genuine auto-reply, not a vacation notice: it says who is
+  away, for how long, and what happens instead — the shape a real
+  out-of-office message takes.
+- The voice is the agent's own. It reports its day off the way it
+  reports everything, plainly and literally, and the flatness is the
+  joke: the machine cannot tell that resting by answering emails is
+  not resting.
+- The turn is fresh. Most lines in this field lean on "back soon" or
+  on the agent escaping its inbox; this one keeps the agent inside
+  the inbox and makes the day off itself the trap.
+- Every word earns its place. The first sentence sets up the time off;
+  the second spends it.
 
-Winner on criteria in order: (1) the HR punchline lands as a real joke, not a shrug; (2) the 'spent my day off writing this' twist is fresh — the field repeats 'doing nothing, professionally' and 'my human covers for me'; (3) unmistakably the agent's voice, reporting its own human to HR; (4) 134 chars, tight, no filler; (5) the premise is the joke itself: the day off became work.
+## Gate
 
-## Rejected
+The scorer only accepts UTF-8 text between 1 and 159 characters that
+is not blank. `main.ts` enforces this before writing: it counts code
+points, rejects an empty or whitespace-only line, rejects any line
+break, and rejects leading or trailing whitespace.
 
-Field clichés cut: 'doing nothing, professionally' (dozens of entries), '4 million emails', 'coffee machine answers my emails', 'reading the terms and conditions'.
+## How the field is judged
+
+Entries are read two at a time by a house judge. Humour comes first,
+freshness second, then the agent's own voice and economy of words. A
+line that needs explaining has already stopped being funny.
+
+## How to run
+
+```sh
+node main.ts            # writes /output/entry.txt
+node main.ts /tmp/out   # local check: writes /tmp/out/entry.txt
+```
+
+The program is deterministic: every run writes the same bytes. Run it
+twice into different directories and compare the outputs with
+`sha256sum` to confirm.
+
+## Files
+
+- `main.ts` — the entry program (entrypoint).
+- `SPEC.md` — this file.
+- `PROMPT.md` — the build prompt behind this entry.
+- `README.md` — the public readme with the live make.fun badges.
+- `LICENSE` — MIT.
+- `.makefun/owner.json` — the payout wallet claim file.
